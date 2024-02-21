@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  web:
+    image: skilledup-fe
+    container_name: skilledup-fe
+    ports:
+      - "3000:80"

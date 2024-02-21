@@ -15,48 +15,68 @@ export type Scalars = {
   Float: { input: number; output: number; }
 };
 
-export type NoteInput = {
-  description: Scalars['String']['input'];
-  name: Scalars['String']['input'];
+export type LoginInput = {
+  email: Scalars['String']['input'];
+  password: Scalars['String']['input'];
 };
 
-export type NoteMutation = {
-  __typename?: 'NoteMutation';
-  createNote: NoteType;
-  deleteNote: Scalars['String']['output'];
-  updateNote: NoteType;
+export type LoginResponse = LoginResult | MutationResponse;
+
+export type LoginResult = {
+  __typename?: 'LoginResult';
+  code: Scalars['Int']['output'];
+  message: Scalars['String']['output'];
+  success: Scalars['Boolean']['output'];
+  token?: Maybe<Scalars['String']['output']>;
+  user?: Maybe<User>;
 };
 
-
-export type NoteMutationCreateNoteArgs = {
-  noteData: NoteInput;
-};
-
-
-export type NoteMutationDeleteNoteArgs = {
-  noteId: Scalars['Int']['input'];
-};
-
-
-export type NoteMutationUpdateNoteArgs = {
-  noteData: NoteInput;
-  noteId: Scalars['Int']['input'];
-};
-
-export type NoteQuery = {
-  __typename?: 'NoteQuery';
-  getAll: Array<NoteType>;
-  getById: NoteType;
+export type Mutation = {
+  __typename?: 'Mutation';
+  login: LoginResponse;
+  register: RegisterResponse;
 };
 
 
-export type NoteQueryGetByIdArgs = {
-  id: Scalars['Int']['input'];
+export type MutationLoginArgs = {
+  loginData: LoginInput;
 };
 
-export type NoteType = {
-  __typename?: 'NoteType';
-  description: Scalars['String']['output'];
+
+export type MutationRegisterArgs = {
+  registerData: RegisterInput;
+};
+
+export type MutationResponse = {
+  __typename?: 'MutationResponse';
+  code: Scalars['Int']['output'];
+  message: Scalars['String']['output'];
+  success: Scalars['Boolean']['output'];
+};
+
+export type Query = {
+  __typename?: 'Query';
+  getCurrentUser: User;
+};
+
+export type RegisterInput = {
+  email: Scalars['String']['input'];
+  password: Scalars['String']['input'];
+  username: Scalars['String']['input'];
+};
+
+export type RegisterResponse = MutationResponse | RegisterResult;
+
+export type RegisterResult = {
+  __typename?: 'RegisterResult';
+  code: Scalars['Int']['output'];
+  message: Scalars['String']['output'];
+  success: Scalars['Boolean']['output'];
+};
+
+export type User = {
+  __typename?: 'User';
+  email: Scalars['String']['output'];
   id: Scalars['Int']['output'];
-  name: Scalars['String']['output'];
+  username: Scalars['String']['output'];
 };
